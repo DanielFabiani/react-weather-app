@@ -108,7 +108,7 @@ const App = () => {
       <Box
         sx={{ display: "grid", gap: 2, mt: 4 }}
         component="form"
-        autoComplete="off"
+        autoComplete="on"
         onSubmit={onSubmit}
       >
         <TextField
