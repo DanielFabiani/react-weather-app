@@ -7,6 +7,12 @@ const API_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${
   import.meta.env.VITE_API_KEY
 }&q=`;
 
+const styles = {
+  input: {
+    color: "#FFFCED", // Cambia el color del texto a azul
+  },
+};
+
 const App = () => {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,6 +29,7 @@ const App = () => {
     icon: "",
     conditionText: "",
     localTime: "",
+    isDay: 0,
   });
 
   const onSubmit = async (event) => {
@@ -79,6 +86,7 @@ const App = () => {
         conditionText: data.current.condition.text,
         localDate: `${mesString} ${dia}, ${parseInt(año, 10)}`,
         localTime: `${hora}`,
+        isDay: data.current.is_day,
       });
     } catch (error) {
       setError({
@@ -92,102 +100,148 @@ const App = () => {
   };
 
   return (
-    <Container
-      maxWidth="xs"
-      sx={{ mt: 2 }}
-    >
-      <Typography
-        variant="h3"
-        component="h1"
-        textAlign="center"
-        gutterBottom
-      >
-        The Weather App
-      </Typography>
-
-      <Box
-        sx={{ display: "grid", gap: 2, mt: 4 }}
-        component="form"
-        autoComplete="on"
-        onSubmit={onSubmit}
-      >
-        <TextField
-          id="city"
-          label="Ciudad"
-          variant="outlined"
-          size="small"
-          required
-          fullWidth
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          error={error.error}
-          helperText={error.message}
+    <div className="appContainer">
+      {weather.isDay === 1 && (
+        <img
+          className="appImg"
+          src="/img/sunny.jpg"
+          alt="Sunny Weather"
         />
-
-        <LoadingButton
-          type="submit"
-          variant="contained"
-          loading={loading}
-          loadingIndicator="Buscando ciudad..."
-        >
-          Buscar
-        </LoadingButton>
-      </Box>
-
-      {weather.city && (
-        <Box sx={{ mt: 2, display: "grid", gap: 2, textAlign: "center" }}>
-          <Typography
-            variant="h4"
-            component="h2"
-          >
-            {weather.city}, {weather.country}
-          </Typography>
-          <Box
-            component="img"
-            src={weather.icon}
-            alt={weather.conditionText}
-            sx={{ margin: "0 auto" }}
-          />
-          <Typography
-            variant="h5"
-            component="h3"
-          >
-            {weather.temp} °C
-          </Typography>
-          <Typography
-            variant="h6"
-            component="h4"
-          >
-            {weather.conditionText}
-          </Typography>
-          <Typography
-            variant="h6"
-            component="h4"
-          >
-            {weather.localTime}hs
-          </Typography>
-          <Typography
-            variant="body1"
-            component="p"
-          >
-            {weather.localDate}
-          </Typography>
-        </Box>
+      )}
+      {weather.isDay === 1 && weather.conditionText.includes("rain") && (
+        <img
+          className="appImg"
+          src="/img/rainDay.jpg"
+          alt="rain day"
+        />
+      )}
+      {weather.isDay === 0 && weather.conditionText === "Clear" && (
+        <img
+          className="appImg"
+          src="/img/clearNight.jpg"
+          alt="clear night"
+        />
+      )}
+      {weather.isDay === 0 && weather.conditionText === "Partly cloudy" && (
+        <img
+          className="appImg"
+          src="/img/clearNight.jpg"
+          alt="clear night"
+        />
+      )}
+      {weather.isDay === 0 && weather.conditionText.includes("rain") && (
+        <img
+          className="appImg"
+          src="/img/rainN.jpg"
+          alt="Sunny Weather"
+        />
       )}
 
-      <Typography
-        textAlign="center"
-        sx={{ mt: 6, fontSize: "10px" }}
+      <Container
+        maxWidth="xs"
+        className="container"
       >
-        Powered by:{" "}
-        <a
-          href="https://www.weatherapi.com/"
-          title="Weather API"
+        <Typography
+          variant="h3"
+          component="h1"
+          textAlign="center"
+          gutterBottom
+          color="#FFFCED"
         >
-          WeatherAPI.com
-        </a>
-      </Typography>
-    </Container>
+          The Weather App
+        </Typography>
+
+        <Box
+          sx={{ display: "grid", gap: 2, mt: 4 }}
+          component="form"
+          autoComplete="off"
+          onSubmit={onSubmit}
+        >
+          <TextField
+            id="city"
+            label="Ciudad"
+            variant="outlined"
+            size="small"
+            required
+            fullWidth
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            error={error.error}
+            helperText={error.message}
+            InputProps={{
+              style: styles.input, // Aplica el estilo al texto
+            }}
+          />
+
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            loading={loading}
+            loadingIndicator="Buscando ciudad..."
+            color="primary"
+            sx={{ color: "#FFFCED" }}
+          >
+            Buscar
+          </LoadingButton>
+        </Box>
+
+        {weather.city && (
+          <Box sx={{ mt: 2, display: "grid", gap: 2, textAlign: "center" }}>
+            <Typography
+              variant="h4"
+              component="h2"
+            >
+              {weather.city}, {weather.country}
+            </Typography>
+            <Box
+              component="img"
+              src={weather.icon}
+              alt={weather.conditionText}
+              sx={{ margin: "0 auto" }}
+            />
+            <Typography
+              variant="h5"
+              component="h3"
+            >
+              {weather.temp} °C
+            </Typography>
+            <Typography
+              variant="h6"
+              component="h4"
+            >
+              {weather.conditionText}
+            </Typography>
+            <Typography
+              variant="h6"
+              component="h4"
+            >
+              {weather.localTime}hs
+            </Typography>
+            <Typography
+              variant="body1"
+              component="p"
+            >
+              {weather.localDate}
+            </Typography>
+          </Box>
+        )}
+        <Typography
+          textAlign="center"
+          sx={{ mt: 8, fontSize: "12px", color: "#FFFCED" }}
+        >
+          Hecho con ❤️ por{" "}
+          <a
+            className="link"
+            href="https://danielfabiani.vercel.app/"
+            title="Daniel Fabiani"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Daniel Fabiani | Frontend developer
+          </a>
+        </Typography>
+      </Container>
+    </div>
   );
 };
 export default App;
