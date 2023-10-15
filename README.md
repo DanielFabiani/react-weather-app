@@ -1,9 +1,9 @@
 <div align='center'>
 
-<img src=https://live.staticflickr.com/65535/53258625073_f4d9b2af1f_h.jpg alt="logo" width=500 height=300 />
+<img src=https://live.staticflickr.com/65535/53258625073_f4d9b2af1f_h.jpg alt="logo" width=600 height=330 />
 
 <h1>Weather App</h1>
-<h4> <a href=https://react-weather-app-daniel-fabiani.vercel.app/>View Demo</a> <span> · </span> <a href="https://github.com/DanielFabiani/react-weather-app/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/DanielFabiani/react-weather-app/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/DanielFabiani/react-weather-app/issues"> Request Feature </a> </h4>
+<h4> <a href=https://react-weather-app-daniel-fabiani.vercel.app/>View Demo</a> <span> · </span> <a href="https://react-weather-app-daniel-fabiani.vercel.app/"> Documentation </a> <span> · </span> <a href="https://github.com/DanielFabiani/react-weather-app/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/DanielFabiani/react-weather-app/issues"> Request Feature </a> </h4>
 
 
 </div>
