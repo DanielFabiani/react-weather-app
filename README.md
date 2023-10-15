@@ -37,4 +37,4 @@ Daniel - https://danielfabiani.vercel.app/
 
 Email - danielfabiani.dev@gmail.com
 
-Project Link: (https://react-weather-app-daniel-fabiani.vercel.app/)
+Project Link: https://react-weather-app-daniel-fabiani.vercel.app/
